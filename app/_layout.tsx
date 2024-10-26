@@ -1,37 +1,108 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
-import 'react-native-reanimated';
+import "../global.css";
 
-import { useColorScheme } from '@/hooks/useColorScheme';
+// // stack Navigation ..
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
+// import { Stack } from "expo-router";
 
-export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
+// export default function RootLayout() {
+//   return (
+//     <Stack
+//       screenOptions={{
+//         headerStyle: {
+//           backgroundColor: "#f4511e",
+//         },
+//         headerTintColor: "#fff",
+//         headerTitleStyle: {
+//           fontWeight: "bold",
+//         },
+//       }}
+//     >
+//       <Stack.Screen name="index" options={{ title: "home" }} />
+//       <Stack.Screen name="about" options={{ title: "about" }} />
+//       <Stack.Screen name="contact" options={{ title: "contact" }} />
+//     </Stack>
+//   );
+// }
 
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
+// Tab Navigation
 
-  if (!loaded) {
-    return null;
-  }
+import { Stack } from "expo-router/stack";
 
+export default function Layout() {
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-    </ThemeProvider>
+    <Stack>
+      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+    </Stack>
   );
 }
+
+// tabs folder layout file code
+// import FontAwesome from "@expo/vector-icons/FontAwesome";
+// import { Tabs } from "expo-router";
+
+// export default function TabLayout() {
+//   return (
+//     <Tabs screenOptions={{ tabBarActiveTintColor: "blue" }}>
+//       <Tabs.Screen
+//         name="index"
+//         options={{
+//           title: "Home",
+//           tabBarIcon: ({ color }) => (
+//             <FontAwesome size={28} name="home" color={color} />
+//           ),
+//         }}
+//       />
+//       <Tabs.Screen
+//         name="contact"
+//         options={{
+//           title: "contact",
+//           tabBarIcon: ({ color }) => (
+//             <FontAwesome size={28} name="cog" color={color} />
+//           ),
+//         }}
+//       />
+//       <Tabs.Screen
+//         name="products"
+//         options={{
+//           title: "products",
+//           tabBarIcon: ({ color }) => (
+//             <FontAwesome size={28} name="cog" color={color} />
+//           ),
+//         }}
+//       />
+//     </Tabs>
+//   );
+// }
+
+// import { GestureHandlerRootView } from "react-native-gesture-handler";
+// import { Drawer } from "expo-router/drawer";
+
+// export default function Layout() {
+//   return (
+//     <GestureHandlerRootView style={{ flex: 1 }}>
+//       <Drawer>
+//         <Drawer.Screen
+//           name="index" // Must match the page's file name
+//           options={{
+//             drawerLabel: "Home",
+//             title: "Home",
+//           }}
+//         />
+//         <Drawer.Screen
+//           name="contact"
+//           options={{
+//             drawerLabel: "Contact",
+//             title: "Contact",
+//           }}
+//         />
+//         <Drawer.Screen
+//           name="products"
+//           options={{
+//             drawerLabel: "Products",
+//             title: "Products",
+//           }}
+//         />
+//       </Drawer>
+//     </GestureHandlerRootView>
+//   );
+// }
